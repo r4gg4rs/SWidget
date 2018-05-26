@@ -53,6 +53,7 @@ SWidget.Galleria = class extends SWidget.Panel {
 		}
 	}
 
+
 	/**
 	 * @function loadFromJsonFile
 	 * @param {String} filename
