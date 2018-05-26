@@ -1,0 +1,82 @@
+/**
+ * Thrumball Wrapper
+ **/
+.SWidget-Galleria-thumball-wrapper {
+	border-color:#fff;
+	border-style: solid;
+	width: 28%;
+	float:left;
+	margin-left:1%;
+	margin-right:1%;
+	margin-top:10px;
+}
+
+.SWidget-Galleria-thumball {
+}
+
+.SWidget-Galleria-button {
+
+}
+
+/**
+ * Selected image
+ **/
+.SWidget-Galleria-selected-image {
+	width: 100%;
+}
+
+#SWidget-Galleria-imageview {
+		position: absolute;
+		top:20px;
+		left: 20px;
+		width: 90%;
+		float:left;
+		z-index: 999;
+}
+
+.test {
+	color: red;
+}
+
+
+	#close-button {
+		background-color: #fff;
+		
+		border-style: solid;
+		border-color:#fff;
+		border-radius:50%;
+		padding-left:5px;
+		padding-right: 5px;		
+		color:#000;
+		position: absolute;
+		top:1px;
+		right: 1px;
+	}
+	#close-button:hover {
+		background-color: #ccc;
+		border-color: #ccc;
+		cursor: pointer;
+	}
+	#prev-button {
+		background-color: #fff;
+		color:#000;
+		position: absolute;
+		top:50%;
+		left:30px;
+		font-size: +130%;
+	}
+	#next-button {
+		background-color: #fff;
+		color:#000;
+		position: absolute;
+		top:50%;
+		right: 0px;
+		font-size: +130%;
+	}
+
+	.gallery-button:hover {
+		background-color: #ccc;
+		border-color: #ccc;
+		cursor: pointer;
+
+	}
