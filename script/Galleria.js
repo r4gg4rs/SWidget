@@ -17,14 +17,20 @@ SWidget.Galleria = class extends SWidget.Panel {
 		this.images = [];
 		this.selectedIndex;
 	}
+
+
 	/**
-	 *
+	 * @function add
 	 **/
 	add(image) {
 		this.images.push(image);
 		this.element.append(image);
 	}
 
+
+	/**
+	 * @function init
+	 **/
 	init() {
 		var _that = this;
 		$(".SWidget-Galleria-thumball-wrapper").each(function(index) {
