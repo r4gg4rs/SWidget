@@ -16,6 +16,15 @@ SWidget.Galleria = class extends SWidget.Panel {
 
 		this.images = [];
 		this.selectedIndex;
+		this.swipe = new SWidget.Swipe(this.image_wiew);
+		var _that = this;
+		this.swipe.onLeft(function(){
+		 _that.next();
+		 _that.image_wiew.append("<p> Left </p>");
+
+		} );
+		this.swipe.onRight(function(){ _that.prev();} )
+		this.swipe.bind();
 	}
 
 
@@ -59,10 +68,8 @@ SWidget.Galleria = class extends SWidget.Panel {
 	 * @param {String} filename
 	 **/
 	loadFromJsonFile(filename) {
-		console.log("loadFromJsonFile " + filename);
 		var _that = this;
 		var json_file = $.getJSON("SMC2018-galleria.json",function(result) {
-			console.log("result " + result);
 			_that.loadFromJson(result);
 		});
 
@@ -92,7 +99,7 @@ SWidget.Galleria = class extends SWidget.Panel {
 			if(elem.photographer) {
 				var info = $("<small> Kuvaaja: " + elem.photographer + "</small>");
 				img_wrapper.append(info);
-				console.log("Kuvaaja : " + elem.photographer)
+				
 			}		
 
 		}
@@ -133,16 +140,29 @@ SWidget.Galleria = class extends SWidget.Panel {
 			this.selectedIndex = index;
 			var img = this.images[index].clone();
 			img.addClass("SWidget-Galleria-selected-image");
-
+			//img.append("<p> Index: " + index + "</p>");
+			//img.find("img").css("width","100%");
+		//	console.log(img.find("img").outerWidth());
+		/*
+			img.css("height",$(window).height());
+			img.css("width", $(window).width());
+			console.log("win " +$(window).height());
+			*/
 			this.image_wiew.empty();
+			//this.swipe.bind();
+			var width = img.outerWidth();
+
 			var closeButton =$("<p id='close-button' class='SWidget-Galleria-button'>X</p>");
 			var prevButton = $("<p id='prev-button' class='SWidget-Galleria-button'>&#10094;</p>");
 			var nextButton = $("<p id='next-button' class='SWidget-Galleria-button'>&#10095;</p>");
-
+		//	console.log(this.images[index].width());
+			//closeButton.css("right", width);
 			var _that = this;
 			
 			closeButton.click(function() {
 				_that.image_wiew.empty();
+				//_that.image_wiew.unbind("touchstart");
+				//_that.swipe.unbind();
 			});
 			nextButton.click(function() {
 				_that.next();
@@ -155,6 +175,14 @@ SWidget.Galleria = class extends SWidget.Panel {
 			this.image_wiew.append(closeButton);
 			this.image_wiew.append(prevButton);
 			this.image_wiew.append(nextButton);
+/*
+			this.image_wiew.bind("touchstart",function() {
+			})
+			this.image_wiew.bind("touchmove",function() {
+				alert("TEST");
+
+			});
+*/
 		}
 
 	}

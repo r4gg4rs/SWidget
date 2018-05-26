@@ -9,6 +9,12 @@
 	margin-left:1%;
 	margin-right:1%;
 	margin-top:10px;
+
+}
+
+.SWidget-Galleria-thumball-wrapper:hover {
+	cursor: pointer;
+	border-color:#aaa;
 }
 
 .SWidget-Galleria-thumball {
@@ -25,6 +31,11 @@
 	width: 100%;
 }
 
+.SWidget-Galleria-selected-image img {
+	width: 100%;
+}
+
+
 #SWidget-Galleria-imageview {
 		position: absolute;
 		top:20px;
@@ -39,44 +50,44 @@
 }
 
 
-	#close-button {
-		background-color: #fff;
-		
-		border-style: solid;
-		border-color:#fff;
-		border-radius:50%;
-		padding-left:5px;
-		padding-right: 5px;		
-		color:#000;
-		position: absolute;
-		top:1px;
-		right: 1px;
-	}
-	#close-button:hover {
-		background-color: #ccc;
-		border-color: #ccc;
-		cursor: pointer;
-	}
-	#prev-button {
-		background-color: #fff;
-		color:#000;
-		position: absolute;
-		top:50%;
-		left:30px;
-		font-size: +130%;
-	}
-	#next-button {
-		background-color: #fff;
-		color:#000;
-		position: absolute;
-		top:50%;
-		right: 0px;
-		font-size: +130%;
-	}
+#close-button {
+	background-color: #fff;
+	
+	border-style: solid;
+	border-color:#fff;
+	border-radius:50%;
+	padding-left:5px;
+	padding-right: 5px;		
+	color:#000;
+	position: absolute;
+	top:1px;
+	right: 1px;
+}
+#close-button:hover {
+	background-color: #ccc;
+	border-color: #ccc;
+	cursor: pointer;
+}
+#prev-button {
+	background-color: #fff;
+	color:#000;
+	position: absolute;
+	top:50%;
+	left:30px;
+	font-size: +130%;
+}
+#next-button {
+	background-color: #fff;
+	color:#000;
+	position: absolute;
+	top:50%;
+	right: 0px;
+	font-size: +130%;
+}
 
-	.gallery-button:hover {
-		background-color: #ccc;
-		border-color: #ccc;
-		cursor: pointer;
+.gallery-button:hover {
+	background-color: #ccc;
+	border-color: #ccc;
+	cursor: pointer;
 
-	}
+}
