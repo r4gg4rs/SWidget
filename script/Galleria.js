@@ -32,8 +32,10 @@ SWidget.Galleria = class extends SWidget.Panel {
 		this.swipe.onRight(function(){ _that.prev();} )
 		this.swipe.bind();
 		this.keylistener.onKeydown(function(event) {
+//			console.log(event.which);
 			if(event.which == '37') _that.prev();
 			if(event.which == '39') _that.next();
+			if(event.which == '27') _that.close();
 		});
 		//this.keylistener.bind();
 		this.isActive = false;
@@ -157,7 +159,6 @@ SWidget.Galleria = class extends SWidget.Panel {
 			var nextButton = $("<p id='next-button' class='SWidget-Galleria-button'>&#10095;</p>");
 			var _that = this;
 			closeButton.click(function() {
-				_that.image_wiew.empty();
 				_that.close();
 			});
 			nextButton.click(function() {
@@ -189,6 +190,8 @@ SWidget.Galleria = class extends SWidget.Panel {
 	 **/
 	close() {
 		this.isActive = false;
+		this.image_wiew.empty();
+	
 		this.swipe.unbind();
 		this.keylistener.unbind();
 	}
