@@ -1,13 +1,18 @@
 /**
- * @author		Jani Haippo
+ * @author		Jani Haippo		jani.haippo@gmail.com
  * @version		26.5.2018
  **/
 
 
 /**
- * @class Swidget.Galleria
+ * class Swidget.Galleria
+ * @extends SWidget.Panel
  **/
 SWidget.Galleria = class extends SWidget.Panel {
+	
+	/**
+	* constructor
+	**/
 	constructor() {
 		var e = $("<div class='SWidget-Galleria'></div>");
 		super(e);
@@ -17,6 +22,7 @@ SWidget.Galleria = class extends SWidget.Panel {
 		this.images = [];
 		this.selectedIndex;
 		this.swipe = new SWidget.Swipe(this.image_wiew);
+		this.keylistener = new SWidget.KeyListener()
 		var _that = this;
 		this.swipe.onLeft(function(){
 		 _that.next();
@@ -25,11 +31,18 @@ SWidget.Galleria = class extends SWidget.Panel {
 		} );
 		this.swipe.onRight(function(){ _that.prev();} )
 		this.swipe.bind();
+		this.keylistener.onKeydown(function(event) {
+			if(event.which == '37') _that.prev();
+			if(event.which == '39') _that.next();
+		});
+		//this.keylistener.bind();
+		this.isActive = false;
 	}
 
 
 	/**
-	 * @function add
+	 * add
+	 * @param {html} image
 	 **/
 	add(image) {
 		this.images.push(image);
@@ -38,13 +51,13 @@ SWidget.Galleria = class extends SWidget.Panel {
 
 
 	/**
-	 * @function init
+	 * init
 	 **/
 	init() {
 		var _that = this;
 		$(".SWidget-Galleria-thumball-wrapper").each(function(index) {
 			$(this).click(function() {
-				_that.showImage(index);
+				_that.open(index);
 			});
 		});
 	}
@@ -64,7 +77,7 @@ SWidget.Galleria = class extends SWidget.Panel {
 
 
 	/**
-	 * @function loadFromJsonFile
+	 * loadFromJsonFile
 	 * @param {String} filename
 	 **/
 	loadFromJsonFile(filename) {
@@ -77,7 +90,7 @@ SWidget.Galleria = class extends SWidget.Panel {
 
 
 	/**
-	 * @function loadFromJson
+	 *  loadFromJson
 	 * @param{json} json - json file
 	 **/
 	loadFromJson(json) {
@@ -91,11 +104,6 @@ SWidget.Galleria = class extends SWidget.Panel {
 			var img  =$("<img src='" + img_src +"' class='SWidget-Galleria-thumball'>");
 			img_wrapper.append(img);
 			this.add(img_wrapper);
-		/*
-			this.images.push(img_wrapper);
-			this.element.append(img_wrapper);
-		*/
-			//console.log("img " + img_src);
 			if(elem.photographer) {
 				var info = $("<small> Kuvaaja: " + elem.photographer + "</small>");
 				img_wrapper.append(info);
@@ -108,7 +116,7 @@ SWidget.Galleria = class extends SWidget.Panel {
 
 
 	/**
-	 * @function next
+	 * next - next image
 	 **/
 	next() {
 
@@ -120,7 +128,7 @@ SWidget.Galleria = class extends SWidget.Panel {
 	}	
 
 	/**
-	 * @function prev
+	 * prev - previous image
 	 **/
 	prev() {
 		if(this.selectedIndex -1 >= 0) {
@@ -131,7 +139,7 @@ SWidget.Galleria = class extends SWidget.Panel {
 	}
 
 	/**
-	 * @function showImage
+	 * showImage
 	 * @param{int} index
 	 **/
 	showImage(index) {
@@ -140,29 +148,17 @@ SWidget.Galleria = class extends SWidget.Panel {
 			this.selectedIndex = index;
 			var img = this.images[index].clone();
 			img.addClass("SWidget-Galleria-selected-image");
-			//img.append("<p> Index: " + index + "</p>");
-			//img.find("img").css("width","100%");
-		//	console.log(img.find("img").outerWidth());
-		/*
-			img.css("height",$(window).height());
-			img.css("width", $(window).width());
-			console.log("win " +$(window).height());
-			*/
+			img.removeClass("SWidget-Galleria-thumball-wrapper");
 			this.image_wiew.empty();
-			//this.swipe.bind();
 			var width = img.outerWidth();
 
 			var closeButton =$("<p id='close-button' class='SWidget-Galleria-button'>X</p>");
 			var prevButton = $("<p id='prev-button' class='SWidget-Galleria-button'>&#10094;</p>");
 			var nextButton = $("<p id='next-button' class='SWidget-Galleria-button'>&#10095;</p>");
-		//	console.log(this.images[index].width());
-			//closeButton.css("right", width);
 			var _that = this;
-			
 			closeButton.click(function() {
 				_that.image_wiew.empty();
-				//_that.image_wiew.unbind("touchstart");
-				//_that.swipe.unbind();
+				_that.close();
 			});
 			nextButton.click(function() {
 				_that.next();
@@ -170,23 +166,32 @@ SWidget.Galleria = class extends SWidget.Panel {
 			prevButton.click(function(){
 				_that.prev();
 			})
-
 			this.image_wiew.append(img);
 			this.image_wiew.append(closeButton);
 			this.image_wiew.append(prevButton);
 			this.image_wiew.append(nextButton);
-/*
-			this.image_wiew.bind("touchstart",function() {
-			})
-			this.image_wiew.bind("touchmove",function() {
-				alert("TEST");
-
-			});
-*/
 		}
-
 	}
 
+
+	/** 
+	 * open
+	 **/
+	open(index) {
+		this.isActive = true;
+		this.swipe.bind();
+		this.keylistener.bind();
+		this.showImage(index);
+	}
+
+	/**
+	 * close
+	 **/
+	close() {
+		this.isActive = false;
+		this.swipe.unbind();
+		this.keylistener.unbind();
+	}
 
 
 }

@@ -1,6 +1,19 @@
+/**
+ * @author		Jani Haippo		jani.haippo@gmail.com
+ * @version		26.5.2018
+ **/
+
+
 if(!SWidget) var SWidget = {}
 
+/**
+ * class swipe
+ **/
 SWidget.Swipe = class {
+	/**
+	 * constructor
+	 * @param {JQuery-element} element
+	 **/
 	constructor(element) {
 		this.xDown = null;
 		this.yDown = null;
@@ -14,16 +27,12 @@ SWidget.Swipe = class {
 		this.leftCallback = [];
 		this.rightCallback = [];
 
-		/*
-		this.element = documnent.querySelector(element);
-		this.element.addEventListener('touchstart')
-		*/
 		this.element = element;
-		//this.element = $("#SWidget-Galleria-imageview");
-		//this.element = $("#" + element);
-		console.log(this.element);
 	}
 
+	/**
+	 * bind
+	 **/
 	bind() {
 		var _that  = this;
 		this.element.bind('touchstart',function(event) {
@@ -53,24 +62,46 @@ SWidget.Swipe = class {
 
 	}
 
+	/**
+	 * unbind
+	 **/
 	unbind() {
 		this.element.unbind('touchstart');
 	}
 
+	/** 
+	 * onLeft - on left swipe
+	 * @param {callback} callback
+	 **/
 	onLeft(callback) {
 		this.leftCallback.push(callback);
 	}
+
+	/**
+	 * onRight - on right swipe
+	 * @param {callback} callback
+	 **/
 	onRight(callback) {
 		this.rightCallback.push(callback);
 	}
 
+	/**
+	 * onUp - on up swipe
+	 * @param {callback} callback
+	 **/
 	onUp(callback) {
 		this.upCallback.push(callback);
 	}
 
+	/**
+	 * onDown - on down swipe
+	 * @param {callback} callback
+	 **/
 	onDown(callback) {
 		this.downCallback.push(callback);
 	}
+
+
 	execLeft() {
 		//alert("left");
 		
