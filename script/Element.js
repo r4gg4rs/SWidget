@@ -16,6 +16,7 @@ SWidget.Element = class {
 	 **/
 	constructor(element) {
 		this.element = element || $("<div></div>");
+		this.id ="";
 	}
 
 	/**
@@ -24,5 +25,10 @@ SWidget.Element = class {
 	 **/
 	HTML() {
 		return this.element;
+	}
+
+	setId(id) {
+		this.id = id;
+		this.element.attr('id',id);
 	}
 }
